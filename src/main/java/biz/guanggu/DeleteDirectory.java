@@ -17,8 +17,8 @@ public class DeleteDirectory extends SimpleFileVisitor<Path> {
             throws IOException {
 //        System.out.println("Deleting " + file.getFileName());
 
-        if(!file.endsWith(".jar"))
-            Files.delete(file);
+        //if(!file.endsWith(".jar"))
+        Files.delete(file);
 
         return FileVisitResult.CONTINUE;
     }
@@ -28,9 +28,11 @@ public class DeleteDirectory extends SimpleFileVisitor<Path> {
                                               IOException exception)
             throws IOException {
         if (exception == null) {
-//            System.out.println("Deleting " + directory.getFileName());
+//          System.out.println("Deleting " + directory.getFileName());
+
             Files.delete(directory);
             return FileVisitResult.CONTINUE;
+
         } else {
             throw exception;
         }

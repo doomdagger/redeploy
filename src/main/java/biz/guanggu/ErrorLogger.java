@@ -14,11 +14,11 @@ public class ErrorLogger {
 
     public void startDeploy(){
         try{
-            writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(ErrorLogger.class.getResource("/run.log").toURI()))));
+            writer = new PrintWriter(new FileWriter(new File(ErrorLogger.class.getResource("/run.log").toURI())),true);
 
-            writer.println("=========================================================");
+            writer.println("===========================================================");
             writer.println("New Redeploy Start to work At "+new Date().toString());
-            writer.println("=========================================================");
+            writer.println("===========================================================");
             writer.flush();
 
         }catch (Exception exception){
@@ -43,7 +43,7 @@ public class ErrorLogger {
     public void endDeploy(){
         if (writer!=null)
         {
-            writer.println("=========================== Deploy End ============================\n\n");
+            writer.println("======================= Deploy End ========================\n\n");
             writer.flush();
             writer.close();
         }

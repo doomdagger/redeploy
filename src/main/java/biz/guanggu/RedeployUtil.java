@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.FileTime;
+import java.util.Arrays;
 
 /**
  * Created by Li He on 2014/6/13.
@@ -37,9 +38,11 @@ public class RedeployUtil {
                 logger.log("redeploy worker need to do nothing at all!");
             }
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.log(e.getMessage()+"\n"+ Arrays.toString(e.getStackTrace()));
         } catch (ArchiveException e) {
-            logger.error(e.getMessage());
+            logger.log(e.getMessage()+"\n"+ Arrays.toString(e.getStackTrace()));
+        } catch (Exception e) {
+            logger.log(e.getMessage()+"\n"+ Arrays.toString(e.getStackTrace()));
         } finally {
             logger.endDeploy();
             synchronized (context.getAttribute("redeploying")){
@@ -88,7 +91,7 @@ public class RedeployUtil {
                 if (Files.exists(folderPath)) {
                     logger.log(folderPath.toString() + " exists! So iterate it and then delete all!");
                     Files.walkFileTree(folderPath, new DeleteDirectory());
-                    Files.deleteIfExists(folderPath);
+                    //Files.deleteIfExists(folderPath);
                     logger.log("finish delete operation...");
                 }
 
